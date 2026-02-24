@@ -1020,7 +1020,9 @@
                 rounded-md
                 hover:bg-accent
                 font-medium"
-              href="https://icst.dedicated.co.za/grafana/d/7gQYcUzHz"
+              href="https://icst.dedicated.co.za/grafana/d/fZKNG14Dz"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               View Demo
             </a>
@@ -2834,6 +2836,12 @@
                 name="_honey"
                 style="display: none;"
               >
+              <input
+                type="hidden"
+                name="_cc"
+                id="dynamic-cc"
+                value=""
+              >
               <div>
                 <label 
                   for="name"
@@ -3040,6 +3048,12 @@
         const successMessage = document.getElementById('successMessage');
         const errorMessage = document.getElementById('errorMessage');
 
+        const clientEmail = document.getElementById('email').value.trim();
+        const ccField = document.getElementById('dynamic-cc');
+        if (clientEmail) {
+          ccField.value = clientEmail;
+        }
+
         successMessage.classList.add('hidden');
         errorMessage.classList.add('hidden');
 
@@ -3060,6 +3074,7 @@
           if (response.ok) {
             successMessage.classList.remove('hidden');
             form.reset();
+            ccField.value = '';
             successMessage.scrollIntoView({
               behavior: 'smooth',
               block:'nearest'
